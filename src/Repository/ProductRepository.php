@@ -43,7 +43,7 @@ class ProductRepository extends ServiceEntityRepository
 
     public function getData():Query {
         return $this->createQueryBuilder('product')
-            //->rand()
+            ->orderBy('RAND()')
             ->setMaxResults(3)
             ->getQuery()
             ;
@@ -60,6 +60,15 @@ class ProductRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('product')
             ->setFirstResult(12*($page-1))
             ->setMaxResults(12)
+            ->getQuery()
+            ;
+    }
+
+    public function getSearch($search) {
+        
+        return $this->createQueryBuilder('product')
+            ->where('product.name = :search')
+            ->setParameter('search',$search->getName())
             ->getQuery()
             ;
     }

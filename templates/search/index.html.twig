@@ -1,0 +1,26 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Search Results{% endblock %}
+
+{% block body %}
+    {{ form_start(form)}}
+    <p>
+        {{form_label(form.name, 'Nom du produit à chercher :')}}
+        {{form_widget(form.name)}}
+        {{form_errors(form.name)}}
+    </p>
+    <p>
+        <input type="submit">
+    </p>
+
+    {{ form_end(form) }}
+
+    {% for product in products %}
+        <p>ID of the product is : {{product.id}}</p>
+        <p>Name of the product is : {{product.name}}</p>
+        <p>Description : {{product.description}}</p>
+        <p>Prix du produit : {{product.price}}</p>
+        <img src="{{product.image}}">
+        <button><a href="{{ url('product', {SLUG: product.slug, products: products}) }}">Consulter</a></button>
+    {% endfor %}
+{% endblock %}
