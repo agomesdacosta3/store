@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+
+{% block pagination %} {% include "pagination_products.html.twig" %} {% endblock %}
+
+
+{% block title %}List of products{% endblock %}
+
+{% block body %}
+    <p>Nombre de produits : {{nbProducts}}
+    {% for product in products %}
+        <p>Nom du produit : {{product.name}}</p>
+        <img src="{{product.image}}">
+        <p>Prix du produit : {{product.price}}</p>
+        <button><a href="{{ url('product', {SLUG: product.slug, products: products}) }}">Consulter</a></button>
+    {% endfor %}
+{% endblock %}
